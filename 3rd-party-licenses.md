@@ -1,8 +1,6 @@
 # Open Source Documentation for SDL2 Vendor
 
-This product contains parts of the following open source components
-
-## Overview
+## This product contains parts of the following open source components
 
 **Name:** SDL2 CMake modules
 
