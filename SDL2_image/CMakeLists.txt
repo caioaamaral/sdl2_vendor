@@ -216,7 +216,15 @@ if(SDL2_IMAGE_FOUND)
     set_target_properties(Image PROPERTIES
                           INTERFACE_INCLUDE_DIRECTORIES "${SDL2_IMAGE_INCLUDE_DIR}"
                           INTERFACE_LINK_LIBRARIES "${SDL2_LIBRARY};${SDL2_IMAGE_LIBRARY}")
-    list(APPEND sdl_targets Image)
-    set(sdl_targets "${sdl_targets}" PARENT_SCOPE)
+
+    install(TARGETS Image EXPORT ${PROJECT_NAME}Targets)
+
+    install(EXPORT ${PROJECT_NAME}Targets
+      FILE ${PROJECT_NAME}_ImageTargets.cmake
+      NAMESPACE SDL2::
+      DESTINATION "share/${PROJECT_NAME}/cmake")
+
+    list(APPEND sdl_components Image)
+    set(sdl_components "${sdl_components}" PARENT_SCOPE)
   endif()
 endif()

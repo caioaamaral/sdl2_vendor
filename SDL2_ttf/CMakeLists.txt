@@ -221,6 +221,14 @@ if(SDL2_TTF_FOUND)
     set_property(TARGET TTF APPEND PROPERTY
                   INTERFACE_LINK_LIBRARIES SDL2)
   endif()
-  list(APPEND sdl_targets TTF)
-  set(sdl_targets "${sdl_targets}" PARENT_SCOPE)
+
+  install(TARGETS TTF EXPORT ${PROJECT_NAME}Targets)
+
+  install(EXPORT ${PROJECT_NAME}Targets
+    FILE ${PROJECT_NAME}_TTFTargets.cmake
+    NAMESPACE SDL2::
+    DESTINATION "share/${PROJECT_NAME}/cmake")
+
+  list(APPEND sdl_components TTF)
+  set(sdl_components "${sdl_components}" PARENT_SCOPE)
 endif()

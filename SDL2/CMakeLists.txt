@@ -351,8 +351,15 @@ if(SDL2_FOUND)
       set_property(TARGET SDL2 APPEND PROPERTY
                    INTERFACE_LINK_LIBRARIES Threads::Threads)
     endif()
-    list(APPEND sdl_targets SDL2)
-    set(sdl_targets "${sdl_targets}" PARENT_SCOPE)
+    install(TARGETS SDL2 EXPORT ${PROJECT_NAME}Targets)
+
+    install(EXPORT ${PROJECT_NAME}Targets
+      FILE ${PROJECT_NAME}_SDL2Targets.cmake
+      NAMESPACE SDL2::
+      DESTINATION "share/${PROJECT_NAME}/cmake")
+    
+    list(APPEND sdl_components SDL2)
+    set(sdl_components "${sdl_components}" PARENT_SCOPE)
   endif()
 
   # SDL2::SDL2main target
@@ -379,6 +386,14 @@ if(SDL2_FOUND)
     endif()
 
   endif()
-  list(APPEND sdl_targets SDL2main)
-  set(sdl_targets "${sdl_targets}" PARENT_SCOPE)
+  
+  install(TARGETS SDL2main EXPORT ${PROJECT_NAME}Targets)
+
+  install(EXPORT ${PROJECT_NAME}Targets
+    FILE ${PROJECT_NAME}_SDL2mainTargets.cmake
+    NAMESPACE SDL2::
+    DESTINATION "share/${PROJECT_NAME}/cmake")
+
+  list(APPEND sdl_components SDL2main)
+  set(sdl_components "${sdl_components}" PARENT_SCOPE)
 endif()
